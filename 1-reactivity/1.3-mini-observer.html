@@ -25,7 +25,7 @@ function observe (obj) {
     Object.defineProperty(obj, key, {
       get () {
         dep.depend()
-        return (`${key} is ${value}`)
+        return value
       },
       set (val) {
         value = val
