@@ -7,6 +7,13 @@
 <script>
 Vue.component('example', {
   // Implement this!
+  props: ['tags'],
+  render (h) {
+    const children = this.tags.map((tag, i) => {
+      return h(tag, [i])
+    })
+    return h('div', children)
+  }
 })
 
 new Vue({ el: '#app' })
