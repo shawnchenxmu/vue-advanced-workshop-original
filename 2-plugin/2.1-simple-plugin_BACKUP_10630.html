@@ -7,6 +7,24 @@ const RulesPlugin = {
     Vue.mixin({
       created () {
         if (this.$options.rules) {
+<<<<<<< HEAD
+          let rules = this.$options.rules
+          let data = this.$data
+          for (let key in data) {
+            let value = data.key
+            Object.defineProperty(data, key, {
+              get () {
+                return value
+              },
+              set (val) {
+                if (!rules[key].validate(val)) {
+                  console.log(rules[key].message)
+                  return rules[key].message
+                }
+              }
+            })
+          }
+=======
           Object.keys(this.$options.rules).forEach(key => {
             const rule = this.$options.rules[key]
             this.$watch(key, newValue => {
@@ -17,6 +35,7 @@ const RulesPlugin = {
               }
             })
           })
+>>>>>>> origin/solution
         }
       }
     })

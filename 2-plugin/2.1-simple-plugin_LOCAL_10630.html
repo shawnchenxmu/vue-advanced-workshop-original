@@ -1,0 +1,33 @@
+<script src="../node_modules/vue/dist/vue.js"></script>
+
+<script>
+const RulesPlugin = {
+  // Implement this!
+  install (Vue) {
+    Vue.mixin({
+      created () {
+        if (this.$options.rules) {
+          let rules = this.$options.rules
+          let data = this.$data
+          for (let key in data) {
+            let value = data.key
+            Object.defineProperty(data, key, {
+              get () {
+                return value
+              },
+              set (val) {
+                if (!rules[key].validate(val)) {
+                  console.log(rules[key].message)
+                  return rules[key].message
+                }
+              }
+            })
+          }
+        }
+      }
+    })
+  }
+}
+
+Vue.use(RulesPlugin)
+</script>
